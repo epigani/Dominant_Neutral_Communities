@@ -1,0 +1,132 @@
+\documentclass[%
+ preprint,            % For two-column layout
+ superscriptaddress, % Affiliations with superscripts
+ amsmath,amssymb,    % Math packages
+ aps,                % APS style
+ pra,                % Choose journal: prl, pra, prb, prc, prd, pre, prstab, prstper, rmp
+ floatfix,           % Fixes for floating figures/tables
+]{revtex4-2}
+
+% ---------- Encoding ----------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ---------- Figures and graphics ----------
+\usepackage{graphicx}   % Include figures
+\usepackage{dcolumn}    % Align table columns on decimal point
+\usepackage{bm}         % Bold math
+\usepackage{xcolor}     % Colors
+
+% ---------- References and links ----------
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{cleveref}   % Smart cross-references
+
+% ---------- Extra math ----------
+\usepackage{mathtools}  % Extends amsmath
+
+% ---------- Theorem-like environments (if needed) ----------
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+% ---------- Title info (example) ----------
+\begin{document}
+
+\title{Title of the Article}
+\author{Emanuele Pigani}
+\email{first.author@institute.edu}
+\affiliation{Institute or University, Department, City, Country}
+\author{Second Author}
+\affiliation{Another Institute, City, Country}
+
+\date{\today}
+
+\begin{abstract}
+    Astract
+\end{abstract}
+
+\maketitle
+
+
+\appendix
+
+\section{Birth-and-death Neutral Model}
+
+We consider the birth-and-death Master Equation
+\begin{equation}
+    \partial_t P_{n}(t) = d_{n+1} P_{n+1}(t) + b_{n-1} P_{n-1}(t) - [d_n + b_n] P_{n}(t),
+    \label{eq:app:BD-ME}
+\end{equation}
+where $P_n(t)$ represents the probability that the abundance of a focal species is $n$ at time $t$. Following~\cite{he2005deriving, sergiacomi2018ubiquitous, pigani2024deviation}, we assume that the birth and death rates are given by 
+\begin{align}
+        b_n &= b\, n + \chi, \label{eq:app:BD-model-b}\\
+        d_n &= d\, n + \mu \left(1-\delta_{n,0}\right). \label{eq:app:BD-model-d}
+\end{align}
+The stationary solution can be derived analytically~\cite{he2005deriving}. For the sake of tractability within the broader framework developed below, we instead consider the diffusive limit, in which the Master Equation governing the system dynamics is approximated by the following Fokker–Planck equation:
+\begin{equation}
+    \partial_t P_n(t) = \partial_n \left[\left((b_1-d_1)n + b_0 - d_0)\right) P_n(t)(t)
+    - \frac{1}{2} \partial_n \left[\left(\sigma_d n + \sigma_e) \right)P_n(t)\right]
+    \right].
+\end{equation}
+The parameter $\sigma_d = d_1 + b_1$ quantifies demographic noise arising from birth-death processes, while $\sigma_e = d_0 + b_0$ captures environmental noise from external factors. 
+
+The stationary solution to the Fokker-Planck equation reads:
+\begin{equation}
+    P_n= \mathcal{N} \left(1+\frac{n}{k}\right)^{-\lambda} e^{-\beta\, n}
+    \label{eq:SAD-mG}
+\end{equation}
+where $\mathcal{N}$ is a normalization constant and the parameters are defined as:
+\begin{equation}
+    \begin{aligned}
+        k&=\frac{\sigma_e}{\sigma_d }=\frac{b_0+d_0}{b_1+d_1},\\
+        \lambda &= 1 + 4 \frac{d_0 b_1 - b_0 d_1}{(b_1+d_1)^2}, \\
+        \beta &= 2 \frac{d_1-b_1}{d_1+b_1}.
+    \end{aligned}
+    \label{eq:params-mG}
+\end{equation}
+The distribution exhibits three distinct regimes: for $n \ll k$ it is nearly flat; in the intermediate range, $k < n < \beta^{-1}$, it follows a power law, which is subsequently bent by an exponential cut-off.
+
+Considering taxonomic resolution, typical values of $d_0/d_1$ and $b_0/b_1$ range between $0$ and $1$ across planktonic groups~\cite{sergiacomi2018ubiquitous}, suggesting that variability in the dynamics is primarily demographic. Under these conditions, $k$ remains low, so that only the power-law regime and the exponential cut-off are detectable. In the critical regime often assumed in neutral models, the exponential cut-off disappears, leaving a pure power-law form of the species abundance distribution, which can be written as
+
+\begin{equation}
+P(n) = \frac{n^{-\lambda}}{\zeta(\lambda)} ,
+\end{equation}
+
+where $\zeta(\cdot)$ is the Riemann zeta function.
+
+\section{Neutral Sampling Theory from a power-law SAD}
+
+In this approximation, the probability of not being present at the local scale becomes
+\begin{equation}
+    \phi(0|p) =\frac{\text{Li}_{\lambda}(1-p)}{\zeta (\lambda)}
+\end{equation}
+where $\text{Li}$ is the polylogarithm function $\text{Li}_n(z)=\sum _{k=1}^{\infty } \frac{z^k}{k^n}$. If we assume $p\ll1$, we can expand this relation and get the scaling relation for the richness
+\begin{equation}
+  \langle S_{p} \rangle = S
+\begin{cases} 
+     -\frac{\Gamma (-\lambda+1 )}{\zeta (\lambda)} p^{\lambda-1} + \mathcal{o}(p^\lambda-1) & \text{if } 1 < \lambda <  2, \\
+    \frac{6}{\pi ^2} p (1-\log (p)) + \mathcal{o}(p\log (p) )  & \text{if } \lambda =2, \\
+    \frac{\zeta (\lambda-1 )}{\zeta (\lambda)} p + \mathcal{o}(p)  & \text{if } \lambda >  2. \\
+\end{cases}
+\end{equation}
+Interestingly, the richness scaling depends on $\lambda$ when $1<\lambda \leq2$ and is linear otherwise. Here, we are interested in the first regime, as $\lambda$ is typically close to $1.5$. In this case, we can explicitly write the scaling relation from the metacommunity properties as
+\begin{equation}
+    \langle S_p \rangle =      \underbrace{-\frac{\Gamma (-\lambda+1 )}{\zeta (\lambda)} \frac{S}{(N)^{\lambda-1}}}_{K} (N_p)^{\lambda-1},
+    \label{eq:HeapsTaraMM}
+\end{equation}
+where $K$ is the \emph{metacommunity biodiversity index}, which is a function of the metacommunity properties. We can infer $K$ from the sampling data, provided that we know $\lambda$, as
+\begin{equation}
+    K = \frac{S_{loc}}{N_{loc}^{\lambda-1}},
+\end{equation}
+where $S_{loc}$ and $N_{loc}$ are the observed local richness and total abundance, respectively.
+
+
+
+
+
+% ---------- Bibliography ----------
+\bibliographystyle{apsrev4-2}
+\bibliography{biblio}
+
+\end{document}
